@@ -33,7 +33,6 @@ const loginValidation = () => {
     return [
         body("email")
             .isString()
-            .withMessage("O nome é obrigatório.")
             .withMessage("O e-mail é obrigatório.")
             .isEmail()
             .withMessage("Insira um e-mail válido."),
@@ -43,7 +42,23 @@ const loginValidation = () => {
     ];
 };
 
+
+const userUpdateValidation = () => {
+  
+  return [
+    body("name")
+      .optional()
+      .isLength({ min: 3})
+      .withMessage("O nome precisa de pelo menos 3 caracteres."),
+    body("password")
+      .optional()
+      .isLength({ min: 5})
+      .withMessage("O senha precisa de pelo menos 5 caracteres."),
+  ]
+};
+
 module.exports = {
   userCreateValidation,
   loginValidation,
+  userUpdateValidation,
 };
